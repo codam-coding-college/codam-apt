@@ -22,7 +22,14 @@ if [ -f $FISHRC ]; then
 	rm -f ${FISHRC}.bak
 fi
 
-echo "Removing capt installation..."
-rm -rf ${HOME}/.capt
+echo "If you do not intend to use capt anymore, you can choose to delete the installation directory to clear some storage space."
+echo "Delete the capt installation directory at ${HOME}/.capt? (y/N)"
+read -r answer
+if [[ "$answer" == [Yy] ]]; then
+	echo "Removing capt installation..."
+	rm -rf ${HOME}/.capt
+else
+	echo "Skipping removal of capt installation directory."
+fi
 
 echo "Done uninstalling capt. Restart your shell to apply changes."
