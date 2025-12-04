@@ -29,15 +29,15 @@ chmod +x ${HOME}/.capt/capt
 
 echo "Adding stuff to zshrc"
 cat <<EOF >>${HOME}/.zshrc
-export LD_LIBRARY_PATH=${HOME}/.capt/root/lib/x86_64-linux-gnu:${HOME}/.capt/root/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
-export PATH=${HOME}/.capt:${HOME}/.capt/root/usr/local/sbin:${HOME}/.capt/root/usr/local/bin:${HOME}/.capt/root/usr/sbin:${HOME}/.capt/root/usr/bin:${HOME}/.capt/root/sbin:${HOME}/.capt/root/bin:${HOME}/.capt/root/usr/games:${HOME}/.capt/root/usr/local/games:${HOME}/.capt/snap/bin:$PATH
+export LD_LIBRARY_PATH=${HOME}/.capt/root/lib/x86_64-linux-gnu:${HOME}/.capt/root/usr/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH
+export PATH=${HOME}/.capt:${HOME}/.capt/root/usr/local/sbin:${HOME}/.capt/root/usr/local/bin:${HOME}/.capt/root/usr/sbin:${HOME}/.capt/root/usr/bin:${HOME}/.capt/root/sbin:${HOME}/.capt/root/bin:${HOME}/.capt/root/usr/games:${HOME}/.capt/root/usr/local/games:${HOME}/.capt/snap/bin:\$PATH
 
 EOF
 
 echo "Adding stuff to bashrc"
 cat <<EOF >>${HOME}/.bashrc
-export LD_LIBRARY_PATH=${HOME}/.capt/root/lib/x86_64-linux-gnu:${HOME}/.capt/root/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
-export PATH=${HOME}/.capt:${HOME}/.capt/root/usr/local/sbin:${HOME}/.capt/root/usr/local/bin:${HOME}/.capt/root/usr/sbin:${HOME}/.capt/root/usr/bin:${HOME}/.capt/root/sbin:${HOME}/.capt/root/bin:${HOME}/.capt/root/usr/games:${HOME}/.capt/root/usr/local/games:${HOME}/.capt/snap/bin:$PATH
+export LD_LIBRARY_PATH=${HOME}/.capt/root/lib/x86_64-linux-gnu:${HOME}/.capt/root/usr/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH
+export PATH=${HOME}/.capt:${HOME}/.capt/root/usr/local/sbin:${HOME}/.capt/root/usr/local/bin:${HOME}/.capt/root/usr/sbin:${HOME}/.capt/root/usr/bin:${HOME}/.capt/root/sbin:${HOME}/.capt/root/bin:${HOME}/.capt/root/usr/games:${HOME}/.capt/root/usr/local/games:${HOME}/.capt/snap/bin:\$PATH
 
 EOF
 
