@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Creating directories..."
+echo "Creating neccesary directories..."
 mkdir -p ${HOME}/.capt/root
 mkdir -p ${HOME}/.capt/debs_temp
 
@@ -27,14 +27,14 @@ EOF
 echo "Setting executable bit on \`capt\` executable..."
 chmod +x ${HOME}/.capt/capt
 
-echo "Adding stuff to zshrc"
+echo "Modifying ~/.zshrc for use with capt..."
 cat <<EOF >>${HOME}/.zshrc
 export LD_LIBRARY_PATH=${HOME}/.capt/root/lib/x86_64-linux-gnu:${HOME}/.capt/root/usr/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH
 export PATH=${HOME}/.capt:${HOME}/.capt/root/usr/local/sbin:${HOME}/.capt/root/usr/local/bin:${HOME}/.capt/root/usr/sbin:${HOME}/.capt/root/usr/bin:${HOME}/.capt/root/sbin:${HOME}/.capt/root/bin:${HOME}/.capt/root/usr/games:${HOME}/.capt/root/usr/local/games:${HOME}/.capt/snap/bin:\$PATH
 
 EOF
 
-echo "Adding stuff to bashrc"
+echo "Modifying ~/.bashrc for use with capt..."
 cat <<EOF >>${HOME}/.bashrc
 export LD_LIBRARY_PATH=${HOME}/.capt/root/lib/x86_64-linux-gnu:${HOME}/.capt/root/usr/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH
 export PATH=${HOME}/.capt:${HOME}/.capt/root/usr/local/sbin:${HOME}/.capt/root/usr/local/bin:${HOME}/.capt/root/usr/sbin:${HOME}/.capt/root/usr/bin:${HOME}/.capt/root/sbin:${HOME}/.capt/root/bin:${HOME}/.capt/root/usr/games:${HOME}/.capt/root/usr/local/games:${HOME}/.capt/snap/bin:\$PATH
@@ -43,7 +43,7 @@ EOF
 
 FISHRC=${HOME}/.config/fish/config.fish
 if [ -f $FISHRC ]; then
-	echo "Adding stuff to fishrc"
+	echo "Modifying ~/.config/fish/config.fish for use with capt..."
 	cat <<EOF >>$FISHRC
 
 # add capt to PATH
@@ -53,4 +53,5 @@ set -p PATH ${HOME}/.capt:${HOME}/.capt/root/bin:${HOME}/.capt/root/sbin:${HOME}
 EOF
 fi
 
-echo "Done, please restart your shell or run \`source ${HOME}/.zshrc\` / \`source ${HOME}/.bashrc\` / \'source ${HOME}/.config/fish/config.fish\' (depending on your shell)"
+echo "Installation of capt complete!"
+echo "Please restart your shell or run \`source ${HOME}/.zshrc\` / \`source ${HOME}/.bashrc\` / \'source ${HOME}/.config/fish/config.fish\' (depending on your shell)"
