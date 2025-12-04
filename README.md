@@ -5,7 +5,7 @@ How to install `capt`\
 Download & run `installer.sh`: `wget https://raw.githubusercontent.com/PanoramixDeDruide/Codam_apt/main/INSTALL.sh && chmod +x INSTALL.sh && ./INSTALL.sh`
 
 How to check if the `apt` package of your choice is available\
--Run `apt-cache search <package-name>`
+-Run `capt search <package-name>`
 
 How to install a package\
 -Run `capt install <package-name>`

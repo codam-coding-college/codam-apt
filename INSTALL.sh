@@ -8,9 +8,60 @@ echo "Creating installer script..."
 cat <<"EOF" >${HOME}/.capt/capt
 #!/bin/bash
 
+GREEN_COLOR="\033[1;32m"
+YELLOW_COLOR="\033[1;33m"
+BLUE_COLOR="\033[0;34m"
+NO_COLOR="\033[0m"
+
 cd ${HOME}/.capt/debs_temp
 rm -rf *.deb
+
+print_error() {
+	local RED_COLOR="\033[1;31m"
+	echo -e "${RED_COLOR}ERROR: ${NO_COLOR}$1"
+}
+
+does_package_exist() {
+	if [ ! $1 ]; then
+		print_error "Missing the package name..."
+		exit 1
+	fi
+	local name="$1"
+	local packages_list=$(apt-cache pkgnames "$name" | grep -x "$name" | wc -l)
+	if [ "$packages_list" -eq 0 ]; then 
+		print_error "No result found..."
+		exit 1
+	elif [ "$packages_list" -gt 1 ]; then
+		print_error "Multiple packages match this name"
+		apt-cache pkgnames "$name" | grep -x "$name"
+		exit 1
+	fi
+}
+
+search_package() {
+	if [ ! $1 ]; then
+		print_error "Missing the search parameter..."
+		exit 1
+	fi
+	echo "Searching for the package..."
+	local search_results=$(apt-cache search --names-only $1)
+	local nb_packages=$(echo "$search_results" | wc -l)
+	if [ "$nb_packages" -eq 0 ]; then
+		print_error "No result found..."
+		exit 1
+	fi
+	echo "$search_results" | while read pkg description; do
+		echo -e "${GREEN_COLOR}${pkg}${NO_COLOR} ${description}"
+	done
+	echo -e "\n${YELLOW_COLOR}Found ${nb_packages} packages${NO_COLOR}"
+}
+
 if [[ $1 == "install" ]]; then
+	if [ ! $2 ]; then
+		print_error "Missing package name..."
+		exit 1
+	fi
+	does_package_exist $2
 	echo "Downloading prerequisites..."
 	apt-get download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances $2 | grep "^\w" | sort -u)
 	echo "Installing..."
@@ -18,8 +69,14 @@ if [[ $1 == "install" ]]; then
 	echo "Finished installing, removing temp files..."
 	rm -rf *.deb
 	echo "Done"
+elif [[ $1 == "search" ]]; then
+	if [ ! $2 ]; then
+		print_error "Missing the search parameter..."
+		exit 1
+	fi
+	search_package $2
 else
-	echo "Capt only supports \`capt install\`"
+	echo "Capt only supports \`capt install and capt search\`"
 fi
 
 EOF
