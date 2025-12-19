@@ -2,7 +2,7 @@
 Replacement for `apt` for use at Codam Linux stations. Might be compatible with other 42 Network Linux systems as well.
 
 How to install `capt`\
-Download & run `installer.sh`: `wget https://raw.githubusercontent.com/codam-coding-college/codam-apt/main/INSTALL.sh && chmod +x INSTALL.sh && ./INSTALL.sh`
+Download & run `INSTALL.sh`: `wget https://raw.githubusercontent.com/codam-coding-college/codam-apt/main/INSTALL.sh && chmod +x INSTALL.sh && ./INSTALL.sh`
 
 How to check if the `apt` package of your choice is available\
 -Run `apt-cache search <package-name>`
